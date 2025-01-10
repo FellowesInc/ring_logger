@@ -208,7 +208,8 @@ defmodule RingLogger.Server do
     {:noreply, detach_client(pid, state)}
   end
 
-  def handle_info(:tick, state = %__MODULE__{persist_path: path, persist_seconds: seconds}) when is_binary(path) do
+  def handle_info(:tick, state = %__MODULE__{persist_path: path, persist_seconds: seconds})
+      when is_binary(path) do
     Process.send_after(self(), :tick, seconds * 1000)
 
     case Persistence.save(path, merge_buffers(state)) do

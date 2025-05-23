@@ -542,6 +542,12 @@ defmodule RingLogger.Viewer do
           %{state | applications_filter: [app_atom | state.applications_filter], current_page: 0}
         end
 
+      # accept the series of applications if entered by user and convert them to atoms list
+      [_cmd | app_strings] ->
+        app_atom = Enum.map(app_strings, &String.to_existing_atom/1)
+
+        %{state | applications_filter: app_atom, current_page: 0}
+
       _ ->
         state
     end

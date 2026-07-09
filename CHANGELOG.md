@@ -2,6 +2,24 @@
 
 This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v0.11.5
+
+* Changes
+  * Fix hang when running `RingLogger.next` on OTP 28 when connected over ssh.
+    This had to do with trying to output raw bytes rather than Unicode and was a
+    long time hack to not crash on garbled log messages. On Elixir 1.16 and
+    later, `String.replace_invalid/2 `is called to fix those messages. Earlier
+    Elixir versions will log `inspect`'d versions of the message.
+
+## v0.11.4
+
+* Changes
+  * Persist logs on terminate if appropriate (Thanks @taun-fellowes)
+  * Support date entry navigation in the log viewer (Thanks @Shivaji-Dhepale, @Suraj Borate)
+  * Fix deprecation warnings in example code (Thanks @axelson)
+  * Fix Elixir 1.19 warnings
+  * Drop support for Elixir <1.13
+
 ## v0.11.3
 
 * Fixes

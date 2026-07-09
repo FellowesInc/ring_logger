@@ -1,7 +1,7 @@
 defmodule RingLogger.MixProject do
   use Mix.Project
 
-  @version "0.11.3"
+  @version "0.11.5"
   @source_url "https://github.com/nerves-project/ring_logger"
 
   def project do
@@ -15,12 +15,7 @@ defmodule RingLogger.MixProject do
       docs: docs(),
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
-      dialyzer: dialyzer(),
-      preferred_cli_env: %{
-        docs: :docs,
-        "hex.publish": :docs,
-        "hex.build": :docs
-      }
+      dialyzer: dialyzer()
     ]
   end
 
@@ -31,6 +26,10 @@ defmodule RingLogger.MixProject do
     [
       extra_applications: [:logger]
     ]
+  end
+
+  def cli do
+    [preferred_envs: %{docs: :docs, "hex.publish": :docs, "hex.build": :docs}]
   end
 
   defp docs do
@@ -45,7 +44,7 @@ defmodule RingLogger.MixProject do
 
   defp deps do
     [
-      {:circular_buffer, "~> 0.4.0"},
+      {:circular_buffer, "~> 1.0 or ~> 0.4.0"},
       {:benchee, "~> 1.1", only: :dev},
       {:ex_doc, "~> 0.18", only: :docs, runtime: false},
       {:dialyxir, "~> 1.2", only: :dev, runtime: false},

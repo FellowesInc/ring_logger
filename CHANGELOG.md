@@ -2,6 +2,17 @@
 
 This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+* Changes
+  * Normalize the deprecated `:warn` log level to `:warning` when storing log
+    entries, loading persisted logs, and reading configuration. The
+    `logger_backends` translation layer still delivers warnings to backends as
+    `:warn`, which caused Elixir 1.20's `Logger.compare_levels/2` to emit
+    "the log level :warn is deprecated" warnings whenever the viewer's level
+    filter ran. Legacy `:warn` config (colors, `:level`, `:module_levels`,
+    `:application_levels`, per-level buffers) is still accepted.
+
 ## v0.11.5
 
 * Changes

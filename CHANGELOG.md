@@ -5,6 +5,14 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## Unreleased
 
 * Changes
+  * Restore full log level fidelity: entries now keep their original `:notice`,
+    `:critical`, `:alert`, and `:emergency` levels instead of being collapsed
+    to `:info`/`:error`. The Logger backend translation layer only delivers the
+    legacy four backend levels but preserves the original level in `:erl_level`
+    metadata, which RingLogger now prefers. This also makes the viewer's level
+    filter usable for all eight levels, and adds `:emergency`, `:alert`,
+    `:critical`, and `:notice` color options (defaulting to the `:error` and
+    `:info` colors, matching `LoggerBackends.Console`).
   * Normalize the deprecated `:warn` log level to `:warning` when storing log
     entries, loading persisted logs, and reading configuration. The
     `logger_backends` translation layer still delivers warnings to backends as
